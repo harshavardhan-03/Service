@@ -1,8 +1,11 @@
 package com.xworkz.service;
 
+import com.xworkz.dao.TransformerDAO;
+import com.xworkz.dao.TransformerDAOImpl;
 import com.xworkz.dto.TransformerDTO;
 
 public class TransformerServiceImpl implements TransformerService {
+	private TransformerDAO dao = new TransformerDAOImpl();
 
 	@Override
 	public String validateAndSave(TransformerDTO dto) {
@@ -60,6 +63,7 @@ public class TransformerServiceImpl implements TransformerService {
 			}
 			if (nameValid && placeValid && angryValid && happyValid && sadValid) {
 				System.out.println("data is valid, returning success");
+				dao.save(dto);
 				return "SUCCESS";
 			}
 			System.out.println("DTO is null, cannot Pass to dao");

@@ -1,9 +1,11 @@
 package com.xworkz.service;
 
+import com.xworkz.dao.GameDAO;
+import com.xworkz.dao.GameDAOImpl;
 import com.xworkz.dto.GameDTO;
 
 public class GameServiceImpl implements GameService {
-
+	private GameDAO dao = new GameDAOImpl();
 	@Override
 	public String validateAndSave(GameDTO dto) {
 		System.out.println("Invoked Validate And Save" + dto);
@@ -62,6 +64,7 @@ public class GameServiceImpl implements GameService {
 			
 			if (nameValid && versionValid && developedByValid && maxPlayersValid && memoryRequiredValid) {
 				System.out.println("Data is valid, returning success");
+				dao.save(dto);
 				return "SUCCESS";
 			}
 			return "FAILED";
